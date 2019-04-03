@@ -1,10 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
 using RESTfulAPI.AspNetCore.NewDb.Models;
+using RESTfulAPI.AspNetCore.NewDb.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace RESTfulAPI.AspNetCore.NewDb
@@ -33,6 +39,8 @@ namespace RESTfulAPI.AspNetCore.NewDb
 
             var connection = "Data Source=personnel.db";
             services.AddDbContext<PersonnelContext>(options => options.UseSqlite(connection));
+
+            services.AddScoped<IPersonnelRepo, PersonnelRepo>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,13 +62,14 @@ namespace RESTfulAPI.AspNetCore.NewDb
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseMvc();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            // app.UseMvc(routes =>
+            // {
+            //     routes.MapRoute(
+            //         name: "default",
+            //         template: "{controller=Home}/{action=Index}/{id?}");
+            // });
         }
     }
 }
