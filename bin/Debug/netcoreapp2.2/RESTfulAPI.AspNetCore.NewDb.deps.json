@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "0a626691589c46bb4d982764444066fd1d62435a"
+    "signature": "a85bfd8c06fd39b6f29d9d79a91f5a70267cf07e"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v2.2": {
       "RESTfulAPI.AspNetCore.NewDb/1.0.0": {
         "dependencies": {
+          "AutoMapper.Collection": "5.0.0",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.3",
@@ -35,6 +36,35 @@
         },
         "compile": {
           "RESTfulAPI.AspNetCore.NewDb.dll": {}
+        }
+      },
+      "AutoMapper/8.0.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Collection/5.0.0": {
+        "dependencies": {
+          "AutoMapper": "8.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Collection.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Collection.dll": {}
         }
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces/2.8.0": {
@@ -3719,6 +3749,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-px8ZMtIq84dxciB29V+ZYOtsRLZP4JlflDDMW13LyeRdwsnIInzlcSHSxpWmVD6U3bbOl2FeLlgomnVtm0jvXw==",
+      "path": "automapper/8.0.0",
+      "hashPath": "automapper.8.0.0.nupkg.sha512"
+    },
+    "AutoMapper.Collection/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PTcaaXG1UpWtVlgjdskYA6AJqxvakNvfNS78jEkrBqqkOrM/AoeAO1/aajHqbyQ90qQcsqE3EUar73E6Ri4paA==",
+      "path": "automapper.collection/5.0.0",
+      "hashPath": "automapper.collection.5.0.0.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.CSharp.Workspaces/2.8.0": {
       "type": "package",
