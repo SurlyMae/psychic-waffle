@@ -9,6 +9,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Services
         IEnumerable<Department> GetDepartments (IEnumerable<int> deptIds);
         Department GetDepartment (int deptId);
         bool DepartmentExists (int deptId);
+        IEnumerable<Employee> GetEmployees ();
         IEnumerable<Employee> GetEmployeesByType (string empType);
         IEnumerable<Employee> GetEmployeesByDept (int deptId);
         Employee GetEmployee (int empId);
