@@ -19,6 +19,8 @@ namespace RESTfulAPI.AspNetCore.NewDb.Services
 
         public bool DepartmentExists (int id) => _db.Departments.Any(d => d.DepartmentId == id);
 
+        public IEnumerable<Employee> GetEmployees() => _db.Employees.OrderBy(e => e.Department).ToList();
+
         public IEnumerable<Employee> GetEmployeesByType (string empType) => _db.Employees.Where(e => e.Type == empType).OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
 
         public IEnumerable<Employee> GetEmployeesByDept (int id) => _db.Employees.Where(e => e.DepartmentId == id).OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();

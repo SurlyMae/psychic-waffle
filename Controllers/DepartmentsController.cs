@@ -29,8 +29,6 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
         {
             var deptsFromRepo = _repo.GetDepartments();
             var depts = AutoMapper.Mapper.Map<IEnumerable<DepartmentDTO>>(deptsFromRepo);
-            
-
             return new JsonResult(depts);
         }
 
