@@ -57,11 +57,13 @@ namespace RESTfulAPI.AspNetCore.NewDb
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Models.Department, Models.DepartmentDTO>();
                 cfg.CreateMap<Models.Employee, Models.EmployeeDTO>().ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
             });
+
             context.SeedDatabase();
 
             app.UseHttpsRedirection();

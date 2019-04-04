@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RESTfulAPI.AspNetCore.NewDb.Models;
 using RESTfulAPI.AspNetCore.NewDb.Services;
+using AutoMapper;
 
 namespace RESTfulAPI.AspNetCore.NewDb.Controllers
 {
@@ -25,11 +26,19 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
             _repo = repository;
         }
         [HttpGet("api/departments")]
-        public IActionResult GetDepartments()
+        public IActionResult GetDepartments ()
         {
             var deptsFromRepo = _repo.GetDepartments();
-            var depts = AutoMapper.Mapper.Map<IEnumerable<DepartmentDTO>>(deptsFromRepo);
+            var depts = Mapper.Map<IEnumerable<DepartmentDTO>>(deptsFromRepo);
             return new JsonResult(depts);
+        }
+
+        [HttpGet("api/departments/{id}")]
+        public IActionResult GetDepartment (int id)
+        {
+            var deptFromRepo = _repo.GetDepartment(id);
+            var dept = Mapper.Map<DepartmentDTO>(deptFromRepo);
+            return new JsonResult(dept);
         }
 
         // //GET: Departments

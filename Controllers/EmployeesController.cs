@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RESTfulAPI.AspNetCore.NewDb.Models;
 using RESTfulAPI.AspNetCore.NewDb.Services;
+using AutoMapper;
 
 namespace RESTfulAPI.AspNetCore.NewDb.Controllers
 {
@@ -29,8 +30,16 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
         public IActionResult GetEmployees()
         {
             var empsFromRepo = _repo.GetEmployees();
-            var emps = AutoMapper.Mapper.Map<IEnumerable<EmployeeDTO>>(empsFromRepo);
+            var emps = Mapper.Map<IEnumerable<EmployeeDTO>>(empsFromRepo);
             return new JsonResult(emps);
+        }
+
+        [HttpGet("api/employees/{id}")]
+        public IActionResult GetEmployee (int id)
+        {
+            var empFromRepo = _repo.GetEmployee(id);
+            var emp = Mapper.Map<EmployeeDTO>(empFromRepo);
+            return new JsonResult(emp);
         }
 
         // // GET: Employees
