@@ -30,15 +30,21 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
         {
             var deptsFromRepo = _repo.GetDepartments();
             var depts = Mapper.Map<IEnumerable<DepartmentDTO>>(deptsFromRepo);
-            return new JsonResult(depts);
+            return Ok(depts);
         }
 
         [HttpGet("api/departments/{id}")]
         public IActionResult GetDepartment (int id)
         {
             var deptFromRepo = _repo.GetDepartment(id);
+
+            if (deptFromRepo == null)
+            {
+                return NotFound();
+            }
+
             var dept = Mapper.Map<DepartmentDTO>(deptFromRepo);
-            return new JsonResult(dept);
+            return Ok(dept);
         }
 
         // //GET: Departments

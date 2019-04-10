@@ -31,15 +31,21 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
         {
             var empsFromRepo = _repo.GetEmployees();
             var emps = Mapper.Map<IEnumerable<EmployeeDTO>>(empsFromRepo);
-            return new JsonResult(emps);
+            return Ok(emps);
         }
 
         [HttpGet("api/employees/{id}")]
         public IActionResult GetEmployee (int id)
         {
             var empFromRepo = _repo.GetEmployee(id);
+
+            if (empFromRepo == null)
+            {
+                return NotFound();
+            }
+            
             var emp = Mapper.Map<EmployeeDTO>(empFromRepo);
-            return new JsonResult(emp);
+            return Ok(emp);
         }
 
         // // GET: Employees
