@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using RESTfulAPI.AspNetCore.NewDb.Models;
 using RESTfulAPI.AspNetCore.NewDb.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace RESTfulAPI.AspNetCore.NewDb
 {
@@ -36,7 +37,15 @@ namespace RESTfulAPI.AspNetCore.NewDb
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(setupAction =>
+            {
+                // if ReturnHttpNotAcceptable is false, API will return responses in default supported format
+                // if unsupported media type is requested (we don't want that)
+                setupAction.ReturnHttpNotAcceptable = true;
+                //default formatter is always first one in below list, so by adding a formatter, 
+                //we now support that format but not as the default
+                setupAction.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var connection = "Data Source=personnel.db";
             services.AddDbContext<PersonnelContext>(options => options.UseSqlite(connection));

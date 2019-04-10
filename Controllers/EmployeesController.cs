@@ -48,6 +48,37 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
             return Ok(emp);
         }
 
+        [HttpGet("api/departments/{deptId}/employees")]
+        public IActionResult GetEmployeesForDepartment(int deptId)
+        {
+            if (!_repo.DepartmentExists(deptId))
+            {
+                return NotFound();
+            }
+
+            var empsForDeptFromRepo = _repo.GetEmployeesByDept(deptId);
+            var empsForDept = Mapper.Map<IEnumerable<EmployeeDTO>>(empsForDeptFromRepo);
+            return Ok(empsForDept);
+        }
+
+        [HttpGet("api/departments/{deptId}/employees/{empId}")]
+        public IActionResult GetEmployeeForDepartment(int deptId, int empId)
+        {
+            if (!_repo.DepartmentExists(deptId))
+            {
+                return NotFound();
+            }
+
+            var empForDeptFromRepo = _repo.GetEmployeeByDept(deptId, empId);
+            if (empForDeptFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var empForDept = Mapper.Map<EmployeeDTO>(empForDeptFromRepo);
+            return Ok(empForDept);
+        }
+
         // // GET: Employees
         // public async Task<IActionResult> Index()
         // {

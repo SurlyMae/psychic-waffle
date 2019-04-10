@@ -12,6 +12,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Services
         IEnumerable<Employee> GetEmployees();
         IEnumerable<Employee> GetEmployeesByType(string empType);
         IEnumerable<Employee> GetEmployeesByDept(int deptId);
+        Employee GetEmployeeByDept(int deptId, int empId);
         Employee GetEmployee(int empId);
         void AddEmployeeToDepartment(int deptId, Employee emp);
         void UpdateEmployee(Employee emp);

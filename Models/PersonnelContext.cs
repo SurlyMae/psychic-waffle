@@ -32,6 +32,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Models
                     {
                         new Employee()
                         {
+                            Id = 101,
                             Type = "Staff",
                             FirstName = "Marnie",
                             LastName = "Williams",
@@ -39,6 +40,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Models
                         },
                         new Employee()
                         {
+                            Id = 102,
                             Type = "Staff",
                             FirstName = "Nicole",
                             LastName = "Smith",
@@ -54,6 +56,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Models
                     {
                         new Employee()
                         {
+                            Id = 201,
                             Type = "Staff",
                             FirstName = "Andrea",
                             LastName = "Sevy",
@@ -61,6 +64,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Models
                         },
                         new Employee()
                         {
+                            Id = 202,
                             Type = "Staff",
                             FirstName = "Leigh",
                             LastName = "Ward",
@@ -76,6 +80,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Models
                     {
                         new Employee()
                         {
+                            Id = 301,
                             Type = "Staff",
                             FirstName = "Lindsay",
                             LastName = "Farmer",
@@ -83,6 +88,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Models
                         },
                         new Employee()
                         {
+                            Id = 302,
                             Type = "Faculty",
                             FirstName = "Ellena",
                             LastName = "Barker",

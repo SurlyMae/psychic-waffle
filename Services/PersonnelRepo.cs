@@ -25,6 +25,8 @@ namespace RESTfulAPI.AspNetCore.NewDb.Services
 
         public IEnumerable<Employee> GetEmployeesByDept(int id) => _db.Employees.Where(e => e.DepartmentId == id).OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
 
+        public Employee GetEmployeeByDept(int deptId, int empId) => _db.Employees.Where(e => e.Id == empId && e.DepartmentId == deptId).FirstOrDefault();
+
         public Employee GetEmployee(int empId) => _db.Employees.Where(e => e.Id == empId).FirstOrDefault();
 
         public void AddEmployeeToDepartment(int id, Employee emp)
