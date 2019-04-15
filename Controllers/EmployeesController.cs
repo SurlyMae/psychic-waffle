@@ -61,7 +61,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
             return Ok(empsForDept);
         }
 
-        [HttpGet("api/departments/{deptId}/employees/{empId}")]
+        [HttpGet("api/departments/{deptId}/employees/{empId}", Name = "GetEmpForDept")]
         public IActionResult GetEmployeeForDepartment(int deptId, int empId)
         {
             if (!_repo.DepartmentExists(deptId))
@@ -77,6 +77,31 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
 
             var empForDept = Mapper.Map<EmployeeDTO>(empForDeptFromRepo);
             return Ok(empForDept);
+        }
+
+        [HttpPost("api/departments/{deptId}/employees")]
+        public IActionResult CreateEmployeeForDepartment(int deptId, [FromBody] EmployeeForCreationDTO emp) 
+        {
+            if (emp == null)
+            {
+                return BadRequest();
+            }
+
+            if (!_repo.DepartmentExists(deptId))
+            {
+                return NotFound();
+            }
+
+            var empToCreate = Mapper.Map<Employee>(emp);
+            _repo.AddEmployeeToDepartment(deptId, empToCreate);
+
+            if (!_repo.Save())
+            {
+                throw new Exception($"Creating an employee for department {deptId} failed on save.");
+            }
+
+            var empCreated = Mapper.Map<EmployeeDTO>(empToCreate);
+            return CreatedAtRoute("GetEmpForDept", new { deptId = deptId, empId = empCreated.Id }, empCreated);
         }
 
         // // GET: Employees

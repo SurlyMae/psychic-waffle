@@ -66,7 +66,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
 
             var deptCreated = Mapper.Map<DepartmentDTO>(deptToCreate);
             //return 201 created response with location header containing URI of newly created dept
-            return CreatedAtRoute("GetDept", new { id = deptCreated.DepartmentId}, deptToCreate );
+            return CreatedAtRoute("GetDept", new { id = deptCreated.DepartmentId}, deptCreated );
         }
 
         // //GET: Departments
