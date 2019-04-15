@@ -29,6 +29,10 @@ namespace RESTfulAPI.AspNetCore.NewDb.Services
 
         public Employee GetEmployee(int empId) => _db.Employees.Where(e => e.Id == empId).FirstOrDefault();
 
+        public void AddDepartment(Department dept) 
+        {
+            _db.Departments.Add(dept);
+        }
         public void AddEmployeeToDepartment(int id, Employee emp)
         {
             var dept = GetDepartment(id);

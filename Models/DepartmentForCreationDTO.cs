@@ -1,8 +1,7 @@
 namespace RESTfulAPI.AspNetCore.NewDb.Models
 {
-    public class DepartmentDTO
+    public class DepartmentForCreationDTO
     {
-        public int DepartmentId {get; set; }
         public string Name { get; set; }
     }
 }

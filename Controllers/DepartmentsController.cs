@@ -33,7 +33,7 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
             return Ok(depts);
         }
 
-        [HttpGet("api/departments/{id}")]
+        [HttpGet("api/departments/{id}", Name = "GetDept")]
         public IActionResult GetDepartment (int id)
         {
             var deptFromRepo = _repo.GetDepartment(id);
@@ -45,6 +45,28 @@ namespace RESTfulAPI.AspNetCore.NewDb.Controllers
 
             var dept = Mapper.Map<DepartmentDTO>(deptFromRepo);
             return Ok(dept);
+        }
+
+        [HttpPost("api/departments")]
+        public IActionResult CreateDeparment ([FromBody] DepartmentForCreationDTO dept)
+        {
+            if (dept == null)
+            {
+                return BadRequest();
+            }
+
+            var deptToCreate = Mapper.Map<Department>(dept);
+            _repo.AddDepartment(deptToCreate);
+            
+            if (!_repo.Save())
+            {
+                //costly but we already implemented global exception handling so...
+                throw new Exception("Creating a department failed on save.");
+            }
+
+            var deptCreated = Mapper.Map<DepartmentDTO>(deptToCreate);
+            //return 201 created response with location header containing URI of newly created dept
+            return CreatedAtRoute("GetDept", new { id = deptCreated.DepartmentId}, deptToCreate );
         }
 
         // //GET: Departments

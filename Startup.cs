@@ -78,6 +78,7 @@ namespace RESTfulAPI.AspNetCore.NewDb
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Models.Department, Models.DepartmentDTO>();
+                cfg.CreateMap<Models.DepartmentForCreationDTO, Models.Department>();
                 cfg.CreateMap<Models.Employee, Models.EmployeeDTO>().ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
             });
 
